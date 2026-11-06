@@ -46,17 +46,12 @@ ABC[2] = 35;
 
 }
  try{
-        // data size should be 3648
- float f =0;
- float a = PI/nPixels;
-  for (int h = 0; h < nPixels; h++){
-  //f = sin(PI*h/nPixels);
-   f = sin(h*a);
-  float g = ABC[2]*f;
+   for (int h = 0; h < nPixels; h++){      // data size should be 3648
+ 
 //  float g = 0*f;
   // wavelength[h] = ABC[0] + (ABC[1]*h) +(ABC[2]*f);
     wavelength[h] = ABC[0] + (ABC[1]*h);
-    wavelength[h] += g;
+   
 //   xData[h] = wavelength[h];
  //   data.setX(h,wavelength[h]);  // why does this not work?
     }
@@ -65,9 +60,25 @@ ABC[2] = 35;
     println("calculated xMin: "+xMin+", xMax: "+xMax);
 }
 catch(Exception e){
-  println("baseline calc fuddkup, charts tab, wavelengths method");
+  println("baseline calc fuddkup, charts tab, wavelengths method 35 as value");
   }
+  
+  
+  try{
+    float g = ABC[2] * 0.5;
+  } catch(Exception e){
+    println("sin function fudd up, using 35 as ABC[2]");
+  ABC[2] = 35.000;
 }
+//ABC[2] = 35.000;
+    float a = PI/nPixels;
+    float f =0;
+      for (int h = 0; h < nPixels; h++){
+          f = sin(h*a);
+          float g = ABC[2]*f;
+          wavelength[h] += g;
+      }   // end of h 
+  } 
 
 
 
