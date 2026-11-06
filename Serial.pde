@@ -40,7 +40,7 @@
     ABC[1] = float(tokenABC[1]);
     ABC[2] = float(tokenABC[2]);
     gotABC = true;
-    println(" got baseline values");
+    println(" got baseline values: "+ABC[0]+", "+ABC[1]+", "+ABC[2] );
     }
     catch(Exception e){
     println("  problem reading ABC values");
@@ -105,17 +105,14 @@ for(int h = 1; h<=counter-5; h++){  // changed from counter to counter - 5
         println("end signal recieved, line 86");
           data.removeInvalidPoints();
         }else{
-          try{
+ try{
       // split into strings at ','
       String[] tokenDat = split(strData[h],",");
       value0 = Integer.parseInt(trim(tokenDat[1]));
-  if(h%1000 == 0){
-  println("counter: "+h+", "+strData[h]);
-//  println("value: "+value0);
-  }
+
  }
  catch(Exception e){
-  println("problem parsing data at line "+h);
+  println("problem parsing data at line "+h+": "+ strData[h]);
 }
       if(value0<yMin){
         yMin = float(value0);
@@ -126,6 +123,10 @@ for(int h = 1; h<=counter-5; h++){  // changed from counter to counter - 5
    pixelNo++;
 //array2.add(xData[pixelNo],value0);
   data.add(wavelength[pixelNo],value0);
+    if(h%1000 == 0){
+  println("counter: "+h+", "+wavelength[pixelNo]+", " +value0);
+//  println("value: "+value0);
+  }
         }
  }
  // end of h loop
