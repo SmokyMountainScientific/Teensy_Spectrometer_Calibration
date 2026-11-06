@@ -165,28 +165,30 @@ void readParLine(String line){
  // }
   
   ///// coppied from Calibtrometer sketch ///////
- //   void write_ABC(){
+ //   void write_ABC()
+    println("ABC[0]: "+ABC[0]);
+ println("ABC[1]: "+ABC[1]);
+  println("ABC[2]: "+ABC[2]);
    String commands = "B";
    try{ // turn ABC values into six char strings
-   println("ABC[0]: "+ABC[0]);
 
-   for(int n = 0; n<3;n++){
-   String aStr = str(ABC[n]);
-   int r = aStr.indexOf("0");
-   if(r == 0){
-     aStr = aStr.substring(1,7);
-   }else{
-   aStr = aStr.substring(0,6);
-   }
-   println("ABC["+n+"]: "+aStr);
-   commands = commands+aStr+",";
-   }
+
+ //  for(int n = 0; n<3;n++){
+  // String aStr = str(ABC[n]);
+    String aStr = String.format("%6.2f", ABC[0]); 
+     commands = commands+aStr+",";
+     aStr = String.format("%6.5f", ABC[1]); 
+     commands = commands+aStr+",";
+     aStr = String.format("%6.3f", ABC[2]); 
+     commands = commands+aStr+",";
+    
    println("command string: "+commands);
    } catch(Exception e){
      println("Problem in writeABC method");
    }
    try{
      serialPort.write(commands);
+     println("writing to serial port: "+commands);
    } catch(Exception e){
    println("error in writing baseline parameters");
  }
